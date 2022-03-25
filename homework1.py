@@ -1,6 +1,6 @@
 import random
 
-count, countSeq, countSame = 0, 0, 0
+count, countS, countSame, countSeq = 0, 0, 0, 0
 arr = [0,0,0,0,0,0]
 
 while True:
@@ -14,9 +14,14 @@ while True:
 
         if j not in arr:
             break
-##2019038003 고영민##
-        countSeq += 1
 
+        countS += 1
+
+    if countS == 6 :
+        countSeq = 0
+        
+##2019038003 고영민##
+        
     for k in range(0, 5):
 
         if arr[k] == arr[k + 1]:
@@ -27,7 +32,8 @@ while True:
     if countSame == 5:
         break
 
-    countSame =0
+    countS = 0
+    countSame = 0
 
 print("6개의 주사위가 모두 동일한 숫자가 나옴 --> %d %d %d %d %d %d" % (arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]))
 print("6개가 동일한 숫자가 나올 때까지 주사위를 던진 횟수 --> %d" % count)
