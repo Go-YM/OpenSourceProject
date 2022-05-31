@@ -1,0 +1,248 @@
+import tkinter as tk
+    
+class Samplewindow(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self._frame = None
+        self.switch_frame(StartPage)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack()
+
+class StartPage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        # 버튼 순서에 맞춰 들어갈 사진 경로 설정
+        photoAry = [tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식 (2).gif"), 
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/일식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/중식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/양식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/분식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/고기.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/패스트푸드.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/별점입력.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/리뷰확인.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색.gif")]
+
+        # 버튼 순서에 맞춰 이동할 페이지로 매게변수 수정(클래스 제작 필요)
+        commandAry = [lambda: master.switch_frame(Page1),
+        lambda: master.switch_frame(Page2),
+        lambda: master.switch_frame(Page3),
+        lambda: master.switch_frame(Page4),
+        lambda: master.switch_frame(Page5),
+        lambda: master.switch_frame(Page6),
+        lambda: master.switch_frame(Page7),
+        lambda: master.switch_frame(Page8),
+        lambda: master.switch_frame(Page9),
+        lambda: master.switch_frame(Page10)]
+
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/탑메뉴.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=1,columnspan=4)
+
+        photo2=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/많이 찾은 식당.gif")
+        photoLabel = tk.Label(self, image=photo2)
+        photoLabel.image = photo2
+        photoLabel.grid(row=3,column=4)
+
+        btn0 = tk.Button(self, image=photoAry[0], command=commandAry[0])
+        btn0.image = photoAry[0]        
+        btn0.grid(row=2,column=1)
+
+        btn1 = tk.Button(self, image=photoAry[1], command=commandAry[1])
+        btn1.image = photoAry[1]        
+        btn1.grid(row=2,column=2)
+
+        btn2 = tk.Button(self, image=photoAry[2], command=commandAry[2])
+        btn2.image = photoAry[2]         
+        btn2.grid(row=2,column=3)
+
+        btn3 = tk.Button(self, image=photoAry[3], command=commandAry[3])
+        btn3.image = photoAry[3]         
+        btn3.grid(row=2,column=4)
+
+        btn4 = tk.Button(self, image=photoAry[4], command=commandAry[4])
+        btn4.image = photoAry[4]        
+        btn4.grid(row=3,column=1) 
+
+        btn5 = tk.Button(self, image=photoAry[5], command=commandAry[5])
+        btn5.image = photoAry[5]      
+        btn5.grid(row=3,column=2)
+
+        btn6 = tk.Button(self, image=photoAry[6], command=commandAry[6])
+        btn6.image = photoAry[6]         
+        btn6.grid(row=3,column=3)
+
+        btn7 = tk.Button(self, image=photoAry[7], command=commandAry[7])
+        btn7.image = photoAry[7]         
+        btn7.grid(row=4,column=1)
+
+        btn8 = tk.Button(self, image=photoAry[8], command=commandAry[8])
+        btn8.image = photoAry[8]         
+        btn8.grid(row=4,column=2)
+
+        btn9 = tk.Button(self, image=photoAry[9], command=commandAry[9])
+        btn9.image = photoAry[9]         
+        btn9.grid(row=4,column=3)
+
+#한식
+class Page1(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#일식
+class Page2(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/일식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#중식
+class Page3(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/중식 탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#양식
+class Page4(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/양식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#분식
+class Page5(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/분식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#고기
+class Page6(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/고기탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#패스트푸드
+class Page7(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/패스트푸드탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#별점입력
+class Page8(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#리뷰확인
+class Page9(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+
+#맛집검색
+class Page10(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+        
+if __name__ == "__main__":
+    window = Samplewindow()
+    window.geometry("1230x760")
+    window.resizable(width=False, height=False)
+    window.mainloop()
