@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import*
+from tkinter import messagebox   
     
 class Samplewindow(tk.Tk):
     def __init__(self):
@@ -26,7 +28,9 @@ class StartPage(tk.Frame):
             tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/패스트푸드.gif"),
             tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/별점입력.gif"),
             tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/리뷰확인.gif"),
-            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색.gif")]
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/최근에본식당.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/종료.gif")]
 
         # 버튼 순서에 맞춰 이동할 페이지로 매게변수 수정(클래스 제작 필요)
         commandAry = [lambda: master.switch_frame(Page1),
@@ -38,17 +42,13 @@ class StartPage(tk.Frame):
         lambda: master.switch_frame(Page7),
         lambda: master.switch_frame(Page8),
         lambda: master.switch_frame(Page9),
-        lambda: master.switch_frame(Page10)]
+        lambda: master.switch_frame(Page10),
+        lambda: master.switch_frame(Page11)]
 
         photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/탑메뉴.gif")
         photoLabel = tk.Label(self, image=photo1)
         photoLabel.image = photo1
         photoLabel.grid(row=1,column=1,columnspan=4)
-
-        photo2=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/많이 찾은 식당.gif")
-        photoLabel = tk.Label(self, image=photo2)
-        photoLabel.image = photo2
-        photoLabel.grid(row=3,column=4)
 
         btn0 = tk.Button(self, image=photoAry[0], command=commandAry[0])
         btn0.image = photoAry[0]        
@@ -89,6 +89,18 @@ class StartPage(tk.Frame):
         btn9 = tk.Button(self, image=photoAry[9], command=commandAry[9])
         btn9.image = photoAry[9]         
         btn9.grid(row=4,column=3)
+
+        #최근에 본 식당 
+        btn10 = tk.Button(self, image=photoAry[10], command=commandAry[10])
+        btn10.image = photoAry[10]         
+        btn10.grid(row=3,column=4)
+
+        #종료
+        btn11 = tk.Button(self, image=photoAry[11], command=commandAry[10])
+        btn11.image = photoAry[11]         
+        btn11.grid(row=4,column=4)
+
+        
 
 #한식
 class Page1(tk.Frame):
@@ -205,7 +217,7 @@ class Page8(tk.Frame):
         btnBack.image = photoback
         btnBack.grid(row=1,column=1)   
         
-        photo1=tk.PhotoImage(file="")
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/별점입력탑.gif")
         photoLabel = tk.Label(self, image=photo1)
         photoLabel.image = photo1
         photoLabel.grid(row=1,column=2,columnspan=3)
@@ -220,7 +232,7 @@ class Page9(tk.Frame):
         btnBack.image = photoback
         btnBack.grid(row=1,column=1)   
         
-        photo1=tk.PhotoImage(file="")
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/리뷰확인탑.gif")
         photoLabel = tk.Label(self, image=photo1)
         photoLabel.image = photo1
         photoLabel.grid(row=1,column=2,columnspan=3)
@@ -236,7 +248,22 @@ class Page10(tk.Frame):
         btnBack.image = photoback
         btnBack.grid(row=1,column=1)   
         
-        photo1=tk.PhotoImage(file="")
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=3)
+
+#최근에본식당
+class Page11(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/최근에본식당탑.gif")
         photoLabel = tk.Label(self, image=photo1)
         photoLabel.image = photo1
         photoLabel.grid(row=1,column=2,columnspan=3)
