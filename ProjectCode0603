@@ -1,0 +1,507 @@
+import tkinter as tk
+from tkinter import*
+from tkinter import messagebox
+import openpyxl
+import operator
+
+wb=openpyxl.load_workbook('/Users/고영민/Desktop/프로젝트/projectlist.xlsx')
+sheet=wb['Sheet1']
+
+def PrintMessage():
+    messagebox.showinfo("상세주소","충청북도 청주시 서원구 모충로 31  1층 (개신동)")
+    #수정해야함 
+    
+class Samplewindow(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self._frame = None
+        self.switch_frame(StartPage)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack()
+
+class StartPage(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        # 버튼 순서에 맞춰 들어갈 사진 경로 설정
+
+        global key
+        
+        photoAry = [tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식 (2).gif"), 
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/일식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/중식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/양식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/분식.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/고기.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/패스트푸드.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/별점입력.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/리뷰확인.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/최근에본식당.gif"),
+            tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/종료.gif")]
+
+        # 버튼 순서에 맞춰 이동할 페이지로 매게변수 수정(클래스 제작 필요)
+        commandAry = [lambda: master.switch_frame(Page1),
+        lambda: master.switch_frame(Page2),
+        lambda: master.switch_frame(Page3),
+        lambda: master.switch_frame(Page4),
+        lambda: master.switch_frame(Page5),
+        lambda: master.switch_frame(Page6),
+        lambda: master.switch_frame(Page7),
+        lambda: master.switch_frame(Page8),
+        lambda: master.switch_frame(Page9),
+        lambda: master.switch_frame(Page10),
+        lambda: master.switch_frame(Page11)]
+
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/탑메뉴.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=1,columnspan=4)
+
+        btn0 = tk.Button(self, image=photoAry[0], command=commandAry[0])
+        btn0.image = photoAry[0]        
+        btn0.grid(row=2,column=1)
+
+        btn1 = tk.Button(self, image=photoAry[1], command=commandAry[1])
+        btn1.image = photoAry[1]        
+        btn1.grid(row=2,column=2)
+
+        btn2 = tk.Button(self, image=photoAry[2], command=commandAry[2])
+        btn2.image = photoAry[2]         
+        btn2.grid(row=2,column=3)
+
+        btn3 = tk.Button(self, image=photoAry[3], command=commandAry[3])
+        btn3.image = photoAry[3]         
+        btn3.grid(row=2,column=4)
+
+        btn4 = tk.Button(self, image=photoAry[4], command=commandAry[4])
+        btn4.image = photoAry[4]        
+        btn4.grid(row=3,column=1) 
+
+        btn5 = tk.Button(self, image=photoAry[5], command=commandAry[5])
+        btn5.image = photoAry[5]      
+        btn5.grid(row=3,column=2)
+
+        btn6 = tk.Button(self, image=photoAry[6], command=commandAry[6])
+        btn6.image = photoAry[6]         
+        btn6.grid(row=3,column=3)
+
+        btn7 = tk.Button(self, image=photoAry[7], command=commandAry[7])
+        btn7.image = photoAry[7]         
+        btn7.grid(row=4,column=1)
+
+        btn8 = tk.Button(self, image=photoAry[8], command=commandAry[8])
+        btn8.image = photoAry[8]         
+        btn8.grid(row=4,column=2)
+
+        btn9 = tk.Button(self, image=photoAry[9], command=commandAry[9])
+        btn9.image = photoAry[9]         
+        btn9.grid(row=4,column=3)
+
+        #최근에 본 식당 
+        btn10 = tk.Button(self, image=photoAry[10], command=commandAry[10])
+        btn10.image = photoAry[10]         
+        btn10.grid(row=3,column=4,columnspan=2)
+
+        #종료
+        btn11 = tk.Button(self, image=photoAry[11], command=commandAry[10])
+        btn11.image = photoAry[11]         
+        btn11.grid(row=4,column=4)
+
+#한식
+class Page1(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+98
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+            
+
+#일식
+class Page2(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/일식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+50
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+
+#중식
+class Page3(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/중식 탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+        photo=[]
+        button=[] 
+
+        for i in range(0,15):
+            temp = i+66
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+
+#양식
+class Page4(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/양식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+34
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+
+#분식
+class Page5(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/분식탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+        
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+18
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+
+#고기
+class Page6(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/고기탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+    
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+2
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+
+#패스트푸드
+class Page7(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/패스트푸드탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+        photo=[]
+        button=[]
+
+        for i in range(0,15):
+            temp = i+82
+            tempStr = "B"+str(temp)
+            photo.append(tk.PhotoImage(file=sheet[tempStr].value))
+            button.append(tk.Button(self,image=photo[i],command=lambda: master.switch_frame(Page12)))
+            button[i].image = photo[i]
+
+        button[0].grid(row= 2,column=1)
+        button[1].grid(row= 2,column=2)
+        button[2].grid(row= 2,column=3)
+        button[3].grid(row= 2,column=4)
+        button[4].grid(row= 2,column=5)
+        button[5].grid(row= 3,column=1)
+        button[6].grid(row= 3,column=2)
+        button[7].grid(row= 3,column=3)
+        button[8].grid(row= 3,column=4)
+        button[9].grid(row= 3,column=5)
+        button[10].grid(row= 4,column=1)
+        button[11].grid(row= 4,column=2)
+        button[12].grid(row= 4,column=3)
+        button[13].grid(row= 4,column=4)
+        button[14].grid(row= 4,column=5)
+        
+        
+
+#별점입력
+class Page8(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/별점입력탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+#리뷰확인
+class Page9(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/리뷰확인탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+
+#맛집검색
+class Page10(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/맛집검색탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+#최근에본식당
+class Page11(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=1,column=1)   
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/최근에본식당탑.gif")
+        photoLabel = tk.Label(self, image=photo1)
+        photoLabel.image = photo1
+        photoLabel.grid(row=1,column=2,columnspan=4)
+
+#가게 상세정보 페이지(label 3개 button 1개)
+class Page12(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master) # 고정
+
+        photoback=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/뒤로가기.gif")
+        btnBack = tk.Button(self,image=photoback,command=lambda: master.switch_frame(StartPage))
+        btnBack.image = photoback
+        btnBack.grid(row=0,column=0)   
+
+        photo=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식탑.gif")
+        photoLabel = tk.Label(self, image=photo)
+        photoLabel.image = photo
+        photoLabel.grid(row=0,column=1,columnspan=3,sticky=W)
+        
+        photo1=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/참숯계림닭갈비_간판(sam).gif")
+        photoLabel1 = tk.Label(self, image=photo1)
+        photoLabel1.image = photo1
+        photoLabel1.grid(row=1,column=0,columnspan=2,sticky=N)
+
+        photo2=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/정문도보3분.gif")
+        photoLabel2 = tk.Button(self, image=photo2,command=PrintMessage)
+        photoLabel2.image = photo2
+        photoLabel2.grid(row=3,column=0)
+
+        photo3=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/한식/참숯계림닭갈비_전화번호.gif")
+        photoLabel3 = tk.Label(self, image=photo3)
+        photoLabel3.image = photo3
+        photoLabel3.grid(row=3,column=1)
+
+        photo4=tk.PhotoImage(file="C:/Users/고영민/Desktop/프로젝트/참숯계림닭갈비_이미지(sam).gif")
+        photoLabel4 = tk.Label(self, image=photo4)
+        photoLabel4.image = photo4
+        photoLabel4.grid(row=1,column=2,columnspan=3,rowspan=3,sticky=W+N)
+
+        
+        
+if __name__ == "__main__":
+    window = Samplewindow()
+    window.geometry("1250x770")
+    window.resizable(width=False, height=False)
+    window.mainloop()
