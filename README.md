@@ -1,1 +1,1 @@
-# OpenSourceProject
+# 파이썬(오픈소스기초프로젝트) 과목의 실습 코드와 프로젝트 코드를 작성한 Repository입니다.
